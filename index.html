@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Un macaco acordeonista que compone canciones únicas a partir de una nota y una semilla."
+    />
+    <title>El Macaco del Fuelle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,900&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="paper-noise" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="El Macaco del Fuelle, inicio">
+        <span class="brand-mark" aria-hidden="true">M</span>
+        <span>
+          <strong>EL MACACO</strong>
+          <small>DEL FUELLE</small>
+        </span>
+      </a>
+
+      <div class="dedication">
+        <span class="dedication-line"></span>
+        <span>Hecho con amor para mi esposa</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 20.5S4 15.7 4 9.5A4.5 4.5 0 0 1 12 6.7a4.5 4.5 0 0 1 8 2.8c0 6.2-8 11-8 11Z" />
+        </svg>
+      </div>
+    </header>
+
+    <main class="app-shell" id="appShell">
+      <section class="composer" aria-labelledby="mainTitle">
+        <p class="eyebrow"><span>01</span> PEQUEÑO TALLER DE CANCIONES</p>
+        <h1 id="mainTitle">Elegí una nota.<br /><em>Él hace el resto.</em></h1>
+        <p class="intro">
+          Cada semilla guarda una canción irrepetible: con riff, estrofa,
+          estribillo y esa dosis justa de monería.
+        </p>
+
+        <div class="control-grid">
+          <label class="field-card" for="keySelect">
+            <span class="field-label">NOTA RAÍZ</span>
+            <span class="select-wrap">
+              <select id="keySelect">
+                <option value="48">DO</option>
+                <option value="50">RE</option>
+                <option value="52">MI</option>
+                <option value="53">FA</option>
+                <option value="55" selected>SOL</option>
+                <option value="57">LA</option>
+                <option value="59">SI</option>
+              </select>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 9 5 5 5-5" /></svg>
+            </span>
+            <span class="field-help" id="modeLabel">TONALIDAD MAYOR</span>
+          </label>
+
+          <div class="field-card rhythm-card">
+            <span class="field-label">RITMO</span>
+            <button class="rhythm-button" id="rhythmButton" type="button">
+              <span>
+                <strong id="rhythmName">CHAMAMÉ</strong>
+                <small id="rhythmTempo">118 BPM · PICADITO</small>
+              </span>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20 7h-4a4 4 0 0 0-4 4v2a4 4 0 0 1-4 4H4M17 4l3 3-3 3M17 14l3 3-3 3" />
+              </svg>
+            </button>
+            <span class="field-help">TOCÁ PARA ALEATORIZAR</span>
+          </div>
+        </div>
+
+        <div class="seed-panel">
+          <div class="seed-heading">
+            <span class="seed-icon">#</span>
+            <span>
+              <strong>SEMILLA DE LA CANCIÓN</strong>
+              <small>La misma semilla siempre crea la misma melodía</small>
+            </span>
+          </div>
+          <div class="seed-input-wrap">
+            <input id="seedInput" value="NUESTRO-AMOR" maxlength="24" spellcheck="false" aria-label="Semilla de la canción" />
+            <button id="randomSeedButton" type="button" aria-label="Generar nueva semilla" title="Nueva semilla">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="4" y="4" width="16" height="16" rx="3" />
+                <circle cx="9" cy="9" r="1" /><circle cx="15" cy="9" r="1" />
+                <circle cx="9" cy="15" r="1" /><circle cx="15" cy="15" r="1" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="play-button" id="playButton" type="button">
+            <span class="play-icon">
+              <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 7 8 5-8 5Z" /></svg>
+              <svg class="icon-stop" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="8" height="8" rx="1" /></svg>
+            </span>
+            <span>
+              <strong class="play-label">TOCAR CANCIÓN</strong>
+              <small id="durationLabel">≈ 50 SEGUNDOS</small>
+            </span>
+          </button>
+          <button class="regenerate-button" id="regenerateButton" type="button" aria-label="Regenerar arreglo" title="Regenerar arreglo">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 11a8 8 0 1 0-2.3 5.7M20 5v6h-6" />
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <section class="stage-column" aria-label="Escenario del macaco">
+        <div class="stage" id="stage">
+          <div class="stage-rays" aria-hidden="true"></div>
+          <div class="music-particles" id="musicParticles" aria-hidden="true"></div>
+          <div class="monkey-wrap">
+            <img src="assets/macaco-acordeon.png" alt="Macaco sonriente tocando un acordeón rojo" />
+          </div>
+
+          <div class="live-badge" id="liveBadge">
+            <span class="live-dot"></span>
+            <span id="liveText">LISTO PARA TOCAR</span>
+          </div>
+
+          <div class="song-card">
+            <div>
+              <span>AHORA SUENA</span>
+              <strong id="songTitle">Caminito de Sol</strong>
+            </div>
+            <div class="current-note" id="currentNote">SOL</div>
+          </div>
+        </div>
+
+        <p class="stage-caption">
+          <span>✦</span> Composición procedural · Ningún macaco fue forzado a solfear
+        </p>
+      </section>
+
+      <section class="arrangement" aria-labelledby="arrangementTitle">
+        <div class="arrangement-heading">
+          <div>
+            <p class="eyebrow"><span>02</span> ESTRUCTURA</p>
+            <h2 id="arrangementTitle">El recorrido de la canción</h2>
+          </div>
+          <div class="song-stats">
+            <span><b id="barCount">24</b> COMPASES</span>
+            <i></i>
+            <span><b id="variationCount">∞</b> VARIACIONES</span>
+          </div>
+        </div>
+
+        <div class="timeline-wrap">
+          <div class="timeline-progress" id="timelineProgress"></div>
+          <div class="timeline" id="timeline" aria-label="Secciones de la canción"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>HECHO ENTRE MATES, MONOS Y MELODÍAS</span>
+      <span class="footer-seed">SEED <b id="footerSeed">NUESTRO-AMOR</b></span>
+    </footer>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

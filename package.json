@@ -1,0 +1,10 @@
+{
+  "name": "macaco-del-fuelle",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Canciones procedurales tocadas por un macaco acordeonista.",
+  "scripts": {
+    "dev": "python3 -m http.server 5173",
+    "start": "python3 -m http.server 5173"
+  }
+}
